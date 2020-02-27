@@ -10,11 +10,13 @@ public class FlashcardDriver
         //initialize variables
         int cardNum;
         int priority;
+        int mast = 0;
         String temp;
         String ans;
         String term;
         String pri;
         Boolean c = false;
+        Boolean master = false;
         int test2;
         ArrayList<Card> deck= new ArrayList<Card>();
 
@@ -33,16 +35,12 @@ public class FlashcardDriver
             term = kb.nextLine();
             System.out.println("what is the answer? ");
             ans = kb.nextLine();
-            System.out.println("Do you struggle with this term? ");
-            System.out.println("answer yes or no ");
-            pri = kb.nextLine();
-            // while (pri != "yes" || pri != "no")
-            // {
-            //     System.out.println("Do you struggle with this term? ");
-            //     System.out.println("answer yes or no ");
-            //     pri = kb.nextLine();
-            // }
-            deck.add(new Card(term, ans, pri, i));
+            do{
+                System.out.println("Do you struggle with this term? ");
+                System.out.println("answer yes or no ");
+                pri = kb.nextLine();
+            } while(!pri.equals("yes") && !pri.equals("no"));
+            deck.add(new Card(term, ans, pri, true));
 
         }
 
@@ -51,35 +49,67 @@ public class FlashcardDriver
         System.out.println();
         System.out.println();
         // Testing
-        for (int j = 0; j < 2; j++)
+        do
         {
+            mast = 0;
+            for (int j = 0; j < 2; j++)
+            {
+                for (int i = 0; i < cardNum; i++)
+                {
+                    if (!deck.get(i).getRepeat())
+                    {
+
+                    }
+                    if (c){
+                        System.out.println("Correct! ");
+                        System.out.println();
+                    }
+                    System.out.println(deck.get(i).getTerm()+ "? ");
+                    temp = kb.nextLine();
+                    if (temp.equals(deck.get(i).getAnswer()))
+                    {
+                        c = true;
+                        deck.get(i).priDec();
+                    }
+                    else if (temp.equals(deck.get(i).getAnswer()))
+                    {
+                        c = false;
+                        deck.get(i).priInc();
+                        System.out.println("The correct answer is " + deck.get(i).getAnswer());
+                        System.out.print("type " + deck.get(i).getAnswer() + ": ");
+                        do
+                        {
+                            temp = kb.nextLine();
+                        } while (temp.equals(deck.get(i).getAnswer()));
+                    }
+                    clearScreen();
+                }
+            }
+            //make sure the quizlet isnt over
             for (int i = 0; i < cardNum; i++)
             {
-                if (c)
+                if (deck.get(i).getPri() < 0)
                 {
-                    System.out.println("Correct! ");
+                    mast++;
+                    deck.get(i).mastered();
                 }
-                System.out.println(deck.get(i).getTerm()+ "? ");
-                temp = kb.nextLine();
-                if (temp == deck.get(i).getAnswer())
-                {
-                    c = true;
-                    deck.get(i).priDec();
-                }
-                else
-                {
-                    c = false;
-                    deck.get(i).priInc();
-                    System.out.println("The correct answer is " + deck.get(i).getAnswer());
-                    System.out.print("type " + deck.get(i).getAnswer() + ": ");
-                    do
-                    {
-                        temp = kb.nextLine();
-                    } while (temp != deck.get(i).getAnswer());
-                }
-                clearScreen();
             }
-        }
+            if (mast == cardNum)
+            {
+                master = true;
+            }
+            //shuffles and asks if wants to take again
+            do {
+            System.out.println("Would you like to shuffle? yes or no")
+            temp = kb.nextLine();
+            } while(!temp.equals("yes") && !temp.equals("no"));
+            // if (temp.equals("yes"))
+            // {
+
+            // }
+
+
+        } while (master == false);
 
         // calculate what cards you need to do over
 

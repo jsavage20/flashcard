@@ -1,25 +1,25 @@
 public class Card
 {
     // instance vairables
-    int cardNum;
+    Boolean repeat;
     String term;
     String answer;
     int priority;
 
     //constructors
-    public Card(String t, String a, String p, int n)
+    public Card(String t, String a, String p, Boolean n)
     {
-        cardNum = n;
+        repeat = n;
         term = t;
         answer = a;
         priority = 0;
         if (p == "yes")
         {
-            priority = 2;
+            priority = 3;
         }
         else if (p == "no")
         {
-            priority = 1;
+            priority = 2;
         }
 
     }
@@ -48,5 +48,13 @@ public class Card
     public void priDec()
     {
         priority--;
+    }
+    public Boolean getRepeat()
+    {
+        return repeat;
+    }
+    public void mastered()
+    {
+        repeat = false;
     }
 }
