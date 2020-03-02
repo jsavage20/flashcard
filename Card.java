@@ -20,7 +20,6 @@ public class Card
         {
             priority = 3;
         }
-
     }
 
     public String showTerm(int cardNum)

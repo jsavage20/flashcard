@@ -27,15 +27,17 @@ public class FlashcardDriver
         //get users amount of flashcards
         cardNum = kb.nextInt();
         //initializing
+        System.out.println("Lets make some flashcards!");
+        System.out.println();
         for (int i = 0; i < cardNum; i++)
         {
-            System.out.println("what is the term? ");
+            System.out.println("what is the question/term? ");
             if (i == 0)
             {
                  term = kb.nextLine();
             }
             term = kb.nextLine();
-            System.out.println("what is the answer? ");
+            System.out.println("what is the answer/definition? ");
             ans = kb.nextLine();
             do{
                 System.out.println("Do you struggle with this term? ");
@@ -147,6 +149,7 @@ public class FlashcardDriver
             }
 
         } while (master == false);
+        clearScreen();
         System.out.println("Thank you for usuing flashcard.java");
 
     }
