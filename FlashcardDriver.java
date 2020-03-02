@@ -56,7 +56,7 @@ public class FlashcardDriver
                 for (int i = 0; i < cardNum; i++)
                 {
 
-                    if (c && i!=0){
+                    if (c){
                         System.out.println("Correct! ");
                         System.out.println();
                     }
@@ -83,8 +83,9 @@ public class FlashcardDriver
                     }
 
                     clearScreen();
-                    Collections.shuffle(deck);
                 }
+                Collections.shuffle(deck);
+                c = false;
             }
             //make sure the quizlet isnt over
             for (int i = 0; i < cardNum; i++)
@@ -98,32 +99,48 @@ public class FlashcardDriver
             if (mast == cardNum)
             {
                 master = true;
-                System.out.println("you have mastered all the terms!")
+                System.out.println("you have mastered all the terms!");
                 System.out.println("Would you like to test again?");
                 temp = kb.nextLine();
                 if (temp.equals("yes"))
                 {
+                    for (int i = 0; i < cardNum; i++)
+                    {
+                        deck.get(i).priSet();
+                    }
                     master = false;
                 }
+                else {
+                    break;
+                }
+                do {
+                System.out.println("Would you like to shuffle? yes or no");
+                temp = kb.nextLine();
+                } while(!temp.equals("yes") && !temp.equals("no"));
+                if (temp.equals("yes"))
+                {
+                    Collections.shuffle(deck);
+                    System.out.println("Shuffled!");
+                    System.out.println();
+                }
             }
+            mast = 0;
             //shuffles and asks if wants to take again
-            do {
-            System.out.println("Would you like to shuffle? yes or no");
-            temp = kb.nextLine();
-            } while(!temp.equals("yes") && !temp.equals("no"));
-            if (temp.equals("yes"))
-            {
-                Collections.shuffle(deck);
-                System.out.println("Shuffled!");
-                System.out.println();
-            }
+
             if (master = false)
             {
                 System.out.println("Would you like to test again?");
                 temp = kb.nextLine();
                 if (temp.equals("yes"))
                 {
+                    for (int i = 0; i < cardNum; i++)
+                    {
+                        deck.get(i).priSet();
+                    }
                     master = false;
+                }
+                else{
+                    break;
                 }
             }
 

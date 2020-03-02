@@ -12,14 +12,13 @@ public class Card
         repeat = n;
         term = t;
         answer = a;
-        priority = 0;
-        if (p == "yes")
+        if (p.equals("yes"))
+        {
+            priority = 5;
+        }
+        else if (p.equals("no"))
         {
             priority = 3;
-        }
-        else if (p == "no")
-        {
-            priority = 2;
         }
 
     }
@@ -49,9 +48,9 @@ public class Card
     {
         priority--;
     }
-    public Boolean getRepeat()
+    public void priSet()
     {
-        return repeat;
+        priority = 3;
     }
     public void mastered()
     {
