@@ -71,7 +71,7 @@ public class FlashcardDriver
                         c = true;
                         deck.get(i).priDec();
                     }
-                    else if (temp.equals(deck.get(i).getAnswer()))
+                    else if (!temp.equals(deck.get(i).getAnswer()))
                     {
                         c = false;
                         deck.get(i).priInc();
@@ -80,9 +80,10 @@ public class FlashcardDriver
                         do
                         {
                             temp = kb.nextLine();
-                        } while (temp.equals(deck.get(i).getAnswer()));
+                        } while (!temp.equals(deck.get(i).getAnswer()));
                     }
                     clearScreen();
+                    Collections.shuffle(deck);
                 }
             }
             //make sure the quizlet isnt over
@@ -100,28 +101,25 @@ public class FlashcardDriver
             }
             //shuffles and asks if wants to take again
             do {
-            System.out.println("Would you like to shuffle? yes or no")
+            System.out.println("Would you like to shuffle? yes or no");
             temp = kb.nextLine();
             } while(!temp.equals("yes") && !temp.equals("no"));
-            // if (temp.equals("yes"))
-            // {
-
-            // }
+            if (temp.equals("yes"))
+            {
+                Collections.shuffle(deck);
+                System.out.println("Shuffled!");
+                System.out.println();
+            }
+            System.out.println("Would you like to test again?");
+            temp = kb.nextLine();
+            if (temp.equals("yes"))
+            {
+                master = false;
+            }
 
 
         } while (master == false);
 
-        // calculate what cards you need to do over
-
-        // int test2 ==
-        // //retesting
-        // for
-
-
-        // Iterator itr= deck.iterator();
-        // while(itr.hasNext()){
-        //     System.out.println(itr.next());
-        // }
 
 
     }
