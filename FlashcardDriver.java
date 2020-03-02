@@ -15,7 +15,9 @@ public class FlashcardDriver
         String ans;
         String term;
         String pri;
+        //used for correct questions
         Boolean c = false;
+        //when the terms are mastered
         Boolean master = false;
         int test2;
         ArrayList<Card> deck= new ArrayList<Card>();
