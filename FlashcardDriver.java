@@ -41,7 +41,6 @@ public class FlashcardDriver
                 pri = kb.nextLine();
             } while(!pri.equals("yes") && !pri.equals("no"));
             deck.add(new Card(term, ans, pri, true));
-
         }
 
         clearScreen();
@@ -56,32 +55,33 @@ public class FlashcardDriver
             {
                 for (int i = 0; i < cardNum; i++)
                 {
-                    if (!deck.get(i).getRepeat())
-                    {
 
-                    }
-                    if (c){
+                    if (c && i!=0){
                         System.out.println("Correct! ");
                         System.out.println();
                     }
-                    System.out.println(deck.get(i).getTerm()+ "? ");
-                    temp = kb.nextLine();
-                    if (temp.equals(deck.get(i).getAnswer()))
+                    if (deck.get(i).getPri() >= 0)
                     {
-                        c = true;
-                        deck.get(i).priDec();
-                    }
-                    else if (!temp.equals(deck.get(i).getAnswer()))
-                    {
-                        c = false;
-                        deck.get(i).priInc();
-                        System.out.println("The correct answer is " + deck.get(i).getAnswer());
-                        System.out.print("type " + deck.get(i).getAnswer() + ": ");
-                        do
+                        System.out.println(deck.get(i).getTerm()+ "? ");
+                        temp = kb.nextLine();
+                        if (temp.equals(deck.get(i).getAnswer()))
                         {
-                            temp = kb.nextLine();
-                        } while (!temp.equals(deck.get(i).getAnswer()));
+                            c = true;
+                            deck.get(i).priDec();
+                        }
+                        else if (!temp.equals(deck.get(i).getAnswer()))
+                        {
+                            c = false;
+                            deck.get(i).priInc();
+                            System.out.println("The correct answer is " + deck.get(i).getAnswer());
+                            System.out.print("type " + deck.get(i).getAnswer() + ": ");
+                            do
+                            {
+                                temp = kb.nextLine();
+                            } while (!temp.equals(deck.get(i).getAnswer()));
+                        }
                     }
+
                     clearScreen();
                     Collections.shuffle(deck);
                 }
@@ -98,6 +98,13 @@ public class FlashcardDriver
             if (mast == cardNum)
             {
                 master = true;
+                System.out.println("you have mastered all the terms!")
+                System.out.println("Would you like to test again?");
+                temp = kb.nextLine();
+                if (temp.equals("yes"))
+                {
+                    master = false;
+                }
             }
             //shuffles and asks if wants to take again
             do {
@@ -110,17 +117,18 @@ public class FlashcardDriver
                 System.out.println("Shuffled!");
                 System.out.println();
             }
-            System.out.println("Would you like to test again?");
-            temp = kb.nextLine();
-            if (temp.equals("yes"))
+            if (master = false)
             {
-                master = false;
+                System.out.println("Would you like to test again?");
+                temp = kb.nextLine();
+                if (temp.equals("yes"))
+                {
+                    master = false;
+                }
             }
 
-
         } while (master == false);
-
-
+        System.out.println("Thank you for usuing flashcard.java");
 
     }
 
